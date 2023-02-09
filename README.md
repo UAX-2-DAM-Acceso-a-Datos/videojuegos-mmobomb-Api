@@ -2,28 +2,12 @@
 
 ![image](https://user-images.githubusercontent.com/117438320/217796002-97df117f-4eef-486a-ab90-423afc7972ce.png)
 
+
+# ✒️ Descripción
+
 Creación de una web recoja información de la api de https://www.mmobomb.com/api
 
 
-# ✒️ Funcionalidad Videojuegos
-
-GET https://www.mmobomb.com/api1/games
-
-Mostrar en una pantalla listado de videojuegos obtenidos por la API. 
-En cada opción tiene que estar disponible un boton para añadir el videojuego a favoritos en base de datos.
-
-# ✒️ Funcionalidad Favoritos
-
-Pagina que consulte en base de datos los favoritos de un usuario.
-
-
-# ✒️ Funcionalidad busqueda por categoria
-
-GET https://www.mmobomb.com/api1/games?category=shooter
-
-# ✒️ Funcionalidad busqueda por plataforma
-
-GET https://www.mmobomb.com/api1/games?platform=pc
 
 
 ## 🔧 Tecnologias
@@ -33,6 +17,45 @@ GET https://www.mmobomb.com/api1/games?platform=pc
 ![](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)
 ![](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+
+
+# :video_game: Funcionalidad Videojuegos
+
+GET https://www.mmobomb.com/api1/games
+
+Mostrar en una pantalla listado de videojuegos obtenidos por la API. 
+En cada opción tiene que estar disponible un boton para añadir el videojuego a favoritos en base de datos.
+
+
+# :star: Funcionalidad Favoritos
+
+Pagina que consulte en base de datos los favoritos de un usuario.
+
+
+# :bookmark_tabs: Funcionalidad busqueda por categoria
+
+GET https://www.mmobomb.com/api1/games?category=shooter
+
+
+# :game_die: Funcionalidad busqueda por plataforma
+
+GET https://www.mmobomb.com/api1/games?platform=pc
+
+
+## :pineapple: Participantes
+
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/AlvaroLozoya"><img src="https://github.com/AlvaroLozoya.png?size=115" width="100px;" /><br /><sub><b>Alvaro</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/EDD-G5"><img src="https://github.com/EDD-G5.png?size=115" width="100px;" /><br /><sub><b>Edu</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/Gonxos"><img src="https://github.com/Gonxos.png?size=115" width="100px;" /><br /><sub><b>Goncho</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/Slacllop"><img src="https://github.com/Slacllop.png?size=115" width="100px;" /><br /><sub><b>Sergio L</b></sub></a><br /></td>
+    </tr>
+   </tbody>
+</table>
 
 ##  Extra
 
