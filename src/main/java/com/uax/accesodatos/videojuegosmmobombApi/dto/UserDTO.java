@@ -1,5 +1,5 @@
 package com.uax.accesodatos.videojuegosmmobombApi.dto;
 
-public class UsuarioDTO {
-
+public class UserDTO {
+	
 }
