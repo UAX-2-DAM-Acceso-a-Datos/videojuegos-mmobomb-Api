@@ -20,7 +20,7 @@ Creación de una web recoja información de la api de https://www.mmobomb.com/ap
 
 
 
-# :video_game: Funcionalidad Videojuegos
+# :video_game: Funcionalidad Videojuegos  (Gonzalo)
 
 GET https://www.mmobomb.com/api1/games
 
@@ -28,19 +28,21 @@ Mostrar en una pantalla listado de videojuegos obtenidos por la API.
 En cada opción tiene que estar disponible un boton para añadir el videojuego a favoritos en base de datos.
 
 
-# :star: Funcionalidad Favoritos
+# :star: Funcionalidad Favoritos (Sergio L)
 
 Pagina que consulte en base de datos los favoritos de un usuario.
 
 
-# :bookmark_tabs: Funcionalidad busqueda por categoria
+# :bookmark_tabs: Funcionalidad busqueda por categoria o plataforma (Eduardo)
 
 GET https://www.mmobomb.com/api1/games?category=shooter
-
-
-# :game_die: Funcionalidad busqueda por plataforma
-
 GET https://www.mmobomb.com/api1/games?platform=pc
+
+
+# :game_die: Funcionalidad Vista Detalle Juego (Alvaro) 
+
+GET https://www.mmobomb.com/api1/game?id=452
+
 
 
 ## :pineapple: Participantes
