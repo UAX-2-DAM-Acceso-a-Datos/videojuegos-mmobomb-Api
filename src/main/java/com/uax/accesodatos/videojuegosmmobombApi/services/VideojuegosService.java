@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosResponseDTO;
 
 
 @Service
@@ -17,13 +18,22 @@ public class VideojuegosService {
 	RestTemplate restT;
 	Gson gson;
 	
+	public static VideojuegosResponseDTO getResponseByString(String result) {
+		
+		Gson gson = new Gson();
+		VideojuegosResponseDTO juegos = gson.fromJson(result, VideojuegosResponseDTO.class);
+		
+		return juegos;
+		
+	}
+	
 	
 	public static VideojuegosDTO getVideojuegoFromApi() {
 		RestTemplate restT = new RestTemplate();
 		
-		VideojuegosDTO juego = restT.getForObject(urlJuegosRandom, VideojuegosDTO.class);
+		String result = restT.getForObject(urlJuegosRandom, String.class);
 		
-		return juego;
+		return getResponseByString(result).getJuegos().get(0);
 		
 		
 	}
