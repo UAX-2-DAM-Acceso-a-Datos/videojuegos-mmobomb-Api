@@ -1,6 +1,6 @@
 package com.uax.accesodatos.videojuegosmmobombApi.dto;
 
-public class VideoJuegosDTO {
+public class VideojuegosDTO {
 	
     public int id;
     public String title;
