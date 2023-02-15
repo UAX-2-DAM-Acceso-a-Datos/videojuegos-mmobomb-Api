@@ -13,3 +13,10 @@ id_user INT,
 PRIMARY KEY (id_videojuego, id_user),
 FOREIGN KEY (id_user) REFERENCES users (id_user) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB;
+
+
+CREATE TABLE categorias(
+id_categoria INT,
+categoria VARCHAR(50),
+PRIMARY KEY(id_categoria)
+)ENGINE=InnoDB;
