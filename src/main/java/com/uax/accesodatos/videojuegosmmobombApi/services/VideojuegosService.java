@@ -54,6 +54,14 @@ public class VideojuegosService {
 		
 	}
 	
+	/**
+	 * @author AlvaroLozoya
+	 * 
+	 * Método para obtener de la api toda la info de un videojuego
+	 * 
+	 * @param id
+	 * @return InfoVideojuegoDTO
+	 */
 	public InfoVideojuegoDTO getInfoVideojuegoById(int id) {
 		Gson gson = new Gson();
 		RestTemplate restT = new RestTemplate();

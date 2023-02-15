@@ -36,7 +36,7 @@ public class VideojuegosController {
 	 * @return vista a la pantalla de juego
 	 */
 	@GetMapping("/go-to-id-juego")
-	public String goToLista(@RequestParam int id, Model model, HttpServletRequest request) {
+	public String goToIdJuego(@RequestParam int id, Model model, HttpServletRequest request) {
 		InfoVideojuegoDTO infoJuego = new InfoVideojuegoDTO();
 		
 		infoJuego = videojuegosservice.getInfoVideojuegoById(id);
