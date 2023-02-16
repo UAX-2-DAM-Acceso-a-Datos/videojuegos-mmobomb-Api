@@ -16,7 +16,10 @@ public class VideojuegosDTO {
     
 	public VideojuegosDTO(int id, String title, String thumbnail, String short_description, String game_url,
 			String genre, String platform, String publisher, String developer, String release_date,
-			String profile_url) {
+			String profile_url) 
+	{
+		
+	
 		this.id = id;
 		this.title = title;
 		this.thumbnail = thumbnail;
@@ -28,6 +31,14 @@ public class VideojuegosDTO {
 		this.developer = developer;
 		this.release_date = release_date;
 		this.profile_url = profile_url;
+	}
+
+	public VideojuegosDTO(int id) {
+		this.id = id;
+	}
+
+	public VideojuegosDTO() {
+		
 	}
 
 	public int getId() {
