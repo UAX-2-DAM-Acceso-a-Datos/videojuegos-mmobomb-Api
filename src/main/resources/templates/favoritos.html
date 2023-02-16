@@ -11,11 +11,10 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<div class="container-fluid bg-dark">
-	
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#">FavoriteGames</a>
+	<div class="bg-dark">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-black">
+			<div class="container">
+				<a class="navbar-brand" href="/"><img th:src="@{/images/logo.png}" class="rounded" style="width: 180px;"/></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarText"
 					aria-controls="navbarText" aria-expanded="false"
@@ -25,26 +24,28 @@
 				<div class="collapse navbar-collapse" id="navbarText">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Features</a>
+							aria-current="page" href="#">Categorias</a></li>
+						<li class="nav-item"><a class="nav-link active" href="#">Plataformas</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="#">Pricing</a>
+						<li class="nav-item"><a class="nav-link active" href="/go-to-favoritos">Favoritos</a>
 						</li>
 					</ul>
-					<span class="navbar-text"> Navbar text with an inline
-						element </span>
+					<div class="navbar-text"> 
+						<a class="btn btn-danger me-1">Log in</a> 
+						<a class="btn btn-light"><span class="text-black">Sign-in</span></a> 
+					</div>
 				</div>
 			</div>
 		</nav>
 		
 		<div class="container">
-			<h1 class="text-white fw-bold mt-3 mb-4 ms-2">FavoriteGames</h1>
+			<h1 class="text-white fw-bold mt-3 mb-4 ms-2">Favoritos</h1>
 			<div class="row justify-content-center">
-				<div class="col-4" th:each="j: ${juegos}">
+				<div class="col-xl-4 col-lg-6 col-sm-12" th:each="j: ${juegos}">
 					<a href="#" class="card my-2 mx-3 border-0"> <img
 						th:src=${j.thumbnail} class="card-img" alt="...">
 					</a>
-					<h5 class="text-white mx-3 mt-2 mb-4 fs-5" th:text="${j.title}"></h5>
+					<h5 class="text-white mx-3 mt-2 mb-4 fs-6" th:text="${j.title}"></h5>
 				</div>
 			</div>
 		</div>
