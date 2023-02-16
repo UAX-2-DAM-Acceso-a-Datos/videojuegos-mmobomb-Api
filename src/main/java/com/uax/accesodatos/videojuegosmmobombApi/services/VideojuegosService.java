@@ -6,25 +6,33 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
-<<<<<<< HEAD
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
-=======
 import com.google.gson.JsonSyntaxException;
->>>>>>> feature/gonzalo
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 
 
 
+/**
+ * @author Gonzalo
+ *
+ */
+/**
+ * @author Gonzalo
+ *
+ */
 @Service
 public class VideojuegosService {
 	
 	private final static String urlJuegosRandom = "https://www.mmobomb.com/api1/games";
 	private final static String urlJuegoById = "https://www.mmobomb.com/api1/game?id=";
 	
-
-	RestTemplate restT;
-	Gson gson;
 	
+	/**
+	 * @author Gonzalo
+	 * @param result
+	 * @return
+	 * @throws JsonSyntaxException
+	 */
 	public static ArrayList<VideojuegosDTO> getResponseByString(String result) throws JsonSyntaxException {
 		ArrayList<VideojuegosDTO>juegos;
 		Gson gson = new Gson();
@@ -35,6 +43,11 @@ public class VideojuegosService {
 	}
 	
 	
+	
+	/**
+	 * @author Gonzalo
+	 * @return
+	 */
 	public static ArrayList<VideojuegosDTO> getListJuegos() {
 		RestTemplate restT = new RestTemplate();
 		ArrayList<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
