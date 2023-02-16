@@ -2,6 +2,7 @@ package com.uax.accesodatos.videojuegosmmobombApi.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,12 @@ import com.uax.accesodatos.videojuegosmmobombApi.services.FavoritosService;
 @Controller
 public class FavoritosController {
 	
+	@Autowired
 	FavoritosService favoritosService;
 	
-	@GetMapping(value = "go-to-favoritos")
-	public String goToFavoritos(@RequestParam("idUser") int idUser, Model model ) {
-		List<VideojuegosDTO> juegos = favoritosService.getFavoritos(idUser);
+	@GetMapping("/go-to-favoritos")
+	public String goToFavoritos(Model model ) {
+		List<VideojuegosDTO> juegos = favoritosService.getFavoritos(1);
 		model.addAttribute("juegos", juegos);
 		
 		return "favoritos";
