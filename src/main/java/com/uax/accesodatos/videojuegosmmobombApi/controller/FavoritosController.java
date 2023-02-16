@@ -25,11 +25,11 @@ public class FavoritosController {
 		return "favoritos";
 	}
 	
-	@GetMapping(value = "add/videojuego")
-	public String addVideojuegoById(@RequestParam int idVideojuego, @RequestParam int idUsuario) {
+	@GetMapping("/addFavorito")
+	public String addVideojuegoById(@RequestParam("id") int idVideojuego) {
 		
-		favoritosService.addFavorito(idVideojuego, idUsuario);
+		favoritosService.addFavorito(idVideojuego, 1);
 		
-		return "redirect:/index";
+		return "redirect:/";
 	}
 }
