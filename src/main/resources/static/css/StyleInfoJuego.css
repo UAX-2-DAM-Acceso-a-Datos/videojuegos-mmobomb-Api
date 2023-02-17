@@ -1,0 +1,10 @@
+.bg-custom{
+	background-color: darkgrey;
+}
+.info-juego{
+	flex-direction: column;
+	justify-items: center;
+	align-items: center;
+	width: 90%;
+	height: 90%;
+}
