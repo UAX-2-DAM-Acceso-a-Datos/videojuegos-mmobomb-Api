@@ -21,7 +21,9 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="..." class="d-block w-100" alt="...">
+                        <div th:each="a: ${images}">
+                            <img th:src="${a.image}" class="d-block w-100">
+                        </div>
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -33,15 +35,17 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <div class="card-body" th:object="v: ${videojuego}">
-                <h5 class="card-title" th:text="${v.title}"></h5>
-                <p class="card-text" th:text="${v.description}"></p>
-                <p class="card-text" th:text="${v.genre}"></p>
-                <p class="card-text" th:text="${v.platform}"></p>
-                <p class="card-text" th:text="${v.developer}"></p>
-                <p class="card-text" th:text="${v.publisher}"></p>
-                <p class="card-text" th:text="${v.minimum_system_requirements}"></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div th:each="v: ${infojuego}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${v.title}"></h5>
+                    <p class="card-text" th:text="${v.description}"></p>
+                    <p class="card-text" th:text="${v.genre}"></p>
+                    <p class="card-text" th:text="${v.platform}"></p>
+                    <p class="card-text" th:text="${v.developer}"></p>
+                    <p class="card-text" th:text="${v.publisher}"></p>
+                    <p class="card-text" th:text="${v.minimum_system_requirements.os}"></p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
             </div>
         </div>
         <div class="flex-1"></div>

@@ -43,7 +43,9 @@
 			<h1 class="text-white fw-bold mt-3 mb-4 ms-2">Videojuegos</h1>
 			<div class="row justify-content-center">
 				<div class="col-xl-4 col-lg-6 col-sm-12" th:each="j: ${juegos}">
-					<a th:href="@{'/addFavorito?id='+ ${#numbers.formatDecimal(j.id, 0, 0)}}" class="card my-2 mx-3 border-0"> <img	th:src=${j.thumbnail} class="card-img" alt="...">
+					<!--<a th:href="@{'/addFavorito?id='+ ${#numbers.formatDecimal(j.id, 0, 0)}}" class="card my-2 mx-3 border-0"> <img	th:src=${j.thumbnail} class="card-img" alt="...">
+					</a> -->
+					<a th:href="@{'/go-to-id-juego?id='+ ${#numbers.formatDecimal(j.id, 0, 0)}}" class="card my-2 mx-3 border-0"> <img	th:src=${j.thumbnail} class="card-img" alt="...">
 					</a>
 					<h5 class="text-white mx-3 mt-2 mb-4 fs-6" th:text="${j.title}"></h5>
 				</div>
