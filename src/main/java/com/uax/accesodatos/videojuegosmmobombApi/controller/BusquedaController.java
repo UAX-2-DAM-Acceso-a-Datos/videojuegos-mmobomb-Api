@@ -15,7 +15,7 @@ import com.uax.accesodatos.videojuegosmmobombApi.services.VideojuegosService;
 
 @Controller
 public class BusquedaController {
-	@GetMapping("/filter")
+	@GetMapping("/init-filter")
 	public String init(Model model) {
 		BusquedaParamsDTO searchArgs = new BusquedaParamsDTO();
 		model.addAttribute("searchArgs", searchArgs);
@@ -25,7 +25,7 @@ public class BusquedaController {
 	@PostMapping("/filter")
 	public String filterVideojuegos(@ModelAttribute("searchArgs") BusquedaParamsDTO searchArgs) {
 		ModelAndView view = new ModelAndView("index");
-		ArrayList<VideojuegosDTO> videojuegos = VideojuegosService.getListJuegosFiltered(searchArgs.getCategory(),
+		ArrayList<BusquedaParamsDTO> videojuegos = VideojuegosService.getListJuegosFiltered(searchArgs.getCategory(),
 				searchArgs.getPlatform());
 		view.addObject("juegos", videojuegos);
 		return "index";
