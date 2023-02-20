@@ -25,7 +25,7 @@ public class BusquedaController {
 	@PostMapping("/filter")
 	public String filterVideojuegos(@ModelAttribute("searchArgs") BusquedaParamsDTO searchArgs) {
 		ModelAndView view = new ModelAndView("index");
-		ArrayList<VideojuegosDTO> videojuegos = VideojuegosService.getListJuegosFiltered(searchArgs.getCategory(),
+		ArrayList<BusquedaParamsDTO> videojuegos = VideojuegosService.getListJuegosFiltered(searchArgs.getCategory(),
 				searchArgs.getPlatform());
 		view.addObject("juegos", videojuegos);
 		return "index";
