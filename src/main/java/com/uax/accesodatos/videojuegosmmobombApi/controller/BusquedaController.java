@@ -15,7 +15,7 @@ import com.uax.accesodatos.videojuegosmmobombApi.services.VideojuegosService;
 
 @Controller
 public class BusquedaController {
-	@GetMapping("/filter")
+	@GetMapping("/init-filter")
 	public String init(Model model) {
 		BusquedaParamsDTO searchArgs = new BusquedaParamsDTO();
 		model.addAttribute("searchArgs", searchArgs);
