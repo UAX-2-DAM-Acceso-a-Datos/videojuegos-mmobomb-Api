@@ -1,6 +1,7 @@
 package com.uax.accesodatos.videojuegosmmobombApi.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,8 +18,8 @@ import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 @Service
 public class VideojuegosService {
 
-	private final static String urlJuegosRandom = "https://www.mmobomb.com/api1/games";
-	private final static String urlJuegoById = "https://www.mmobomb.com/api1/game?id=";
+	private final static String URLJUEGOSRANDOM = "https://www.mmobomb.com/api1/games";
+	private final static String URLJUEGOBYID = "https://www.mmobomb.com/api1/game?id=";
 
 	/**
 	 * @author Gonzalo
@@ -42,12 +43,11 @@ public class VideojuegosService {
 	public static ArrayList<VideojuegosDTO> getListJuegos() {
 		RestTemplate restT = new RestTemplate();
 		ArrayList<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
-		String result = restT.getForObject(urlJuegosRandom, String.class);
+		String result = restT.getForObject(URLJUEGOSRANDOM, String.class);
 
 		juegos = getResponseByString(result);
 
 		return juegos;
-
 	}
 
 	/**
@@ -61,11 +61,41 @@ public class VideojuegosService {
 	public InfoVideojuegoDTO getInfoVideojuegoById(int id) {
 		Gson gson = new Gson();
 		RestTemplate restT = new RestTemplate();
-		String result = restT.getForObject(urlJuegoById + id, String.class);
+		String result = restT.getForObject(URLJUEGOBYID + id, String.class);
 
 		InfoVideojuegoDTO videojuego = gson.fromJson(result, InfoVideojuegoDTO.class);
 
 		return videojuego;
 	}
 
+	/**
+	 * @author Edu
+	 * 
+	 *         coger de la api la lista filtrada por categoria o plataforma
+	 * 
+	 * @param categoria
+	 * @param platform
+	 * @return
+	 */
+	public static ArrayList<VideojuegosDTO> getListJuegosFiltered(Optional<String> categoria,
+			Optional<String> platform) {
+		RestTemplate restT = new RestTemplate();
+		ArrayList<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
+
+		String url = URLJUEGOSRANDOM + "?";
+		if (categoria.isPresent() && platform.isPresent()) {
+			url += "category=" + categoria.get() + "&platform=" + platform.get();
+		} else if (categoria.isPresent()) {
+			url += "category=" + categoria.get();
+		} else if (platform.isPresent()) {
+			url += "platform=" + platform.get();
+		} else {
+			url = URLJUEGOSRANDOM;
+		}
+		String result = restT.getForObject(url, String.class);
+
+		juegos = getResponseByString(result);
+
+		return juegos;
+	}
 }
