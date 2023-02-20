@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Inicio</title>
+</head>
+
+<body>
+
+	<div class="container p-5">
+		<form action="post" class="row justify-content-center text-white" th:action="@{/filter}"
+			th:object="${searchArgs}">
+			<div class="col-3 col-sm-2 me-3 d-flex">
+				<select th;field="*{category}" th:value="*{categoria}" class="form-select"
+					aria-label="Default select example">
+					<option selected>Open this select menu</option>
+					<option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.categoria}"></option>
+				</select>
+			</div>
+			<div class="col-3 col-sm-2 me-3 d-flex">
+				<select th;field="*{platform}" th:value="*{platform}" class="form-select"
+					aria-label="Default select example">
+					<option selected>Open this select menu</option>
+					<option value="1">One</option>
+				</select>
+			</div>
+			<div class="col-3 col-sm-2">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
