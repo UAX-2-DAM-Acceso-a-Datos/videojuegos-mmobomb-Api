@@ -13,9 +13,9 @@ public class CategoriaRepository {
 	@Autowired
 	private JdbcTemplate jdbctemplate;
 
-	public List<CategoriaDTO> getAllCategorias(int user) {
-		List<CategoriaDTO> juegos = new ArrayList<CategoriaDTO>();
-		juegos = jdbctemplate.query("SELECT * FROM categorias;", new CategoriaRowMapper());
-		return juegos;
+	public List<CategoriaDTO> getAllCategorias() {
+		List<CategoriaDTO> categorias = new ArrayList<CategoriaDTO>();
+		categorias = jdbctemplate.query("SELECT * FROM categorias;", new CategoriaRowMapper());
+		return categorias;
 	}
 }

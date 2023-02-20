@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uax.accesodatos.videojuegosmmobombApi.dto.BusquedaParamsDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.repositories.CategoriaRepository;
+import com.uax.accesodatos.videojuegosmmobombApi.repositories.PlataformaRepository;
 import com.uax.accesodatos.videojuegosmmobombApi.services.VideojuegosService;
 
 @Controller
@@ -19,13 +21,15 @@ public class BusquedaController {
 	public String init(Model model) {
 		BusquedaParamsDTO searchArgs = new BusquedaParamsDTO();
 		model.addAttribute("searchArgs", searchArgs);
+		model.addAttribute("categorias", new CategoriaRepository().getAllCategorias());
+		model.addAttribute("plataformas", new PlataformaRepository().getAllPlataformas());
 		return "busquedaForm";
 	}
 
 	@PostMapping("/filter")
 	public String filterVideojuegos(@ModelAttribute("searchArgs") BusquedaParamsDTO searchArgs) {
 		ModelAndView view = new ModelAndView("index");
-		ArrayList<BusquedaParamsDTO> videojuegos = VideojuegosService.getListJuegosFiltered(searchArgs.getCategory(),
+		ArrayList<VideojuegosDTO> videojuegos = VideojuegosService.getListJuegosFiltered(searchArgs.getCategory(),
 				searchArgs.getPlatform());
 		view.addObject("juegos", videojuegos);
 		return "index";
