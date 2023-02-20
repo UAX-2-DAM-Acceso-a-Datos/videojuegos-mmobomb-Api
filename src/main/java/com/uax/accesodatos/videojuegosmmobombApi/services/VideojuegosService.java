@@ -1,14 +1,13 @@
 package com.uax.accesodatos.videojuegosmmobombApi.services;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
-import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
 import com.google.gson.JsonSyntaxException;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 
 /**
@@ -77,21 +76,21 @@ public class VideojuegosService {
 	 * @param platform
 	 * @return
 	 */
-	public static ArrayList<VideojuegosDTO> getListJuegosFiltered(Optional<String> categoria,
-			Optional<String> platform) {
+	public static ArrayList<VideojuegosDTO> getListJuegosFiltered(String categoria, String platform) {
 		RestTemplate restT = new RestTemplate();
 		ArrayList<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
 
 		String url = URLJUEGOSRANDOM + "?";
-		if (categoria.isPresent() && platform.isPresent()) {
-			url += "category=" + categoria.get() + "&platform=" + platform.get();
-		} else if (categoria.isPresent()) {
-			url += "category=" + categoria.get();
-		} else if (platform.isPresent()) {
-			url += "platform=" + platform.get();
+		if (categoria != null && platform != null) {
+			url += "category=" + categoria + "&platform=" + platform;
+		} else if (categoria != null) {
+			url += "category=" + categoria;
+		} else if (platform != null) {
+			url += "platform=" + platform;
 		} else {
 			url = URLJUEGOSRANDOM;
 		}
+		
 		String result = restT.getForObject(url, String.class);
 
 		juegos = getResponseByString(result);
