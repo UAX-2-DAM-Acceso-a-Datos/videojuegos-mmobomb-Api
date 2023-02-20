@@ -9,47 +9,63 @@
     <link rel="stylesheet" href="./CSS/StyleInfoJuego.css">
 </head>
 
-<body>
-    <section class="bg-custom">
-        <div class="flex-1"></div>
-        <div class="card info-juego position-absolute top-50 start-50 translate-middle">
-            <div id="carouselExampleIndicators" class="carousel slide">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
+<body class="bg-custom">
+    <div>
+        <div class="flex-1 bg-dark"></div>
+        <div class="card info-juego position-absolute top-50 start-50 translate-middle bg-dark">
+            <div class="carousel-custom">
+                <div id="carouselExampleIndicators" class="carousel slide">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
                         <div th:each="a: ${images}">
-                            <img th:src="${a.image}" class="d-block w-100">
+                            <div class="carousel-item active align-content-center">
+                                <img th:src="${a.image}" class="d-block w-100">
+                            </div>
                         </div>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
-            <div th:each="v: ${infojuego}">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${v.title}"></h5>
-                    <p class="card-text" th:text="${v.description}"></p>
-                    <p class="card-text" th:text="${v.genre}"></p>
-                    <p class="card-text" th:text="${v.platform}"></p>
-                    <p class="card-text" th:text="${v.developer}"></p>
-                    <p class="card-text" th:text="${v.publisher}"></p>
-                    <p class="card-text" th:text="${v.minimum_system_requirements.os}"></p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div>
+                <div th:each="v: ${infojuego}" class="mt-5 bg-dark">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="p2 m-2">
+                                <h3 class="card-title text-light" th:text="${v.title}"></h3>
+                            </div>
+                            <div class="p2">
+                                <a href="#" class="btn btn-danger">Añadir a Favoritos</a>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-light">Descripción</h5>
+                        <p class="card-text text-light" th:text="${v.description}"></p>
+                        <h5 class="card-title text-light">Genero</h5>
+                        <p class="card-text text-light" th:text="${v.genre}"></p>
+                        <h5 class="card-title text-light">Plataformas</h5>
+                        <p class="card-text text-light" th:text="${v.platform}"></p>
+                        <h5 class="card-title text-light">Desarrollador</h5>
+                        <p class="card-text text-light" th:text="${v.developer}"></p>
+                        <h5 class="card-title text-light">publicado por</h5>
+                        <p class="card-text text-light" th:text="${v.publisher}"></p>
+                        <h5 class="card-title text-light">Requisitos minimos del sistema</h5>
+                        <p class="card-text text-light" th:text="${v.minimum_system_requirements.os}"></p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flex-1"></div>
-    </section>
+        <div class="flex-1 bg-dark"></div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 
