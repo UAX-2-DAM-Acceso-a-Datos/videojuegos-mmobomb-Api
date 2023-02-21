@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 	<meta charset="UTF-8">
@@ -46,15 +46,15 @@
 				<div class="col-3 col-sm-2 me-3 d-flex">
 					<select th;field="*{category}" th:value="*{category}" class="form-select"
 						aria-label="Default select example">
-						<option selected>Open this select menu</option>
-						<option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.categoria}"></option>
+						<option th:value="null" selected>--Seleccione una opción--</option>
+						<option th:each="c : ${categories}" th:value="${c.id_categoria}" th:text="${c.categoria}"></option>
 					</select>
 				</div>
 				<div class="col-3 col-sm-2 me-3 d-flex">
 					<select th;field="*{platform}" th:value="*{platform}" class="form-select"
 						aria-label="Default select example">
-						<option selected>Open this select menu</option>
-						<option value="1">One</option>
+						<option th:value="null" selected>--Seleccione una opción--</option>
+						<option th:each="p : ${platforms}" th:value="${p.id_plataforma}" th:text="${p.plataforma}"></option>
 					</select>
 				</div>
 				<div class="col-3 col-sm-2">
