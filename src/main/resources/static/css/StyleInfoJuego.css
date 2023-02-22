@@ -1,0 +1,17 @@
+.bg-custom{
+	background-color: #5e5e5e;
+}
+.info-juego{
+	flex-direction: column;
+	justify-items: center;
+	align-items: center;
+	width: 90%;
+	height: auto;
+	margin-top: 18%;
+	
+}
+.carousel-custom{
+	margin-top: 2%;
+	width: 65%;
+	height: 65%;
+}

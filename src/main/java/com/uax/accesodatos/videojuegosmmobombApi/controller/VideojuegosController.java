@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.MinSysReqDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.services.VideojuegosService;
 
@@ -31,17 +32,25 @@ public class VideojuegosController {
 	/**
 	 * @author AlvaroLozoya 
 	 * Metodo GET para hacer una llamada a la api con un id de un juego específico
+	 * Realiza una comparación para ver si contiene requisitos minimos, en caso de que no muestra no 
+	 * disponible
 	 *         
 	 * @param model
 	 * @return vista a la pantalla de juego
 	 */
 	@GetMapping("/go-to-id-juego")
-	public String goToIdJuego(@RequestParam int id, Model model, HttpServletRequest request) {
+	public String goToIdJuego(@RequestParam int id, Model model) {
 		InfoVideojuegoDTO infoJuego = new InfoVideojuegoDTO();
 		
 		infoJuego = videojuegosservice.getInfoVideojuegoById(id);
 		
-		model.addAttribute("infovideojuego", infoJuego);
+		if (infoJuego.getMinimum_system_requirements() == null) {
+			MinSysReqDTO minSysReqdto = new MinSysReqDTO("No Disponible");
+			infoJuego.setMinimum_system_requirements(minSysReqdto);
+		}
+		
+		model.addAttribute("images", infoJuego.getScreenshots());
+		model.addAttribute("infojuego", infoJuego);
 
 		return "InfoJuego";
 	}
