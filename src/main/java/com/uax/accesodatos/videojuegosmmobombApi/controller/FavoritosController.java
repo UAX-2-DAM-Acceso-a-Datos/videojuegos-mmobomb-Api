@@ -42,8 +42,6 @@ public class FavoritosController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();
 	    
-	    
-		
 		favoritosService.addFavorito(idVideojuego, favoritosService.getIdUser(username));
 		
 		return "redirect:/juegos";
