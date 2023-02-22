@@ -20,7 +20,7 @@ public class FavoritosController {
 	
 	@Autowired
 	FavoritosService favoritosService;
-	FavoritosRepository fr;
+	FavoritosRepository fr = new FavoritosRepository();
 	
 	@GetMapping("/go-to-favoritos")
 	public String goToFavoritos(Model model) {
@@ -34,15 +34,18 @@ public class FavoritosController {
 		
 		model.addAttribute("juegos", juegos);
 		
-		
 		return "favoritos";
 	}
 	
 	@GetMapping("/addFavorito")
-	public String addVideojuegoById(@RequestParam("id") int idVideojuego, String username) {
+	public String addVideojuegoById(@RequestParam("id") int idVideojuego) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();
+	    
+	    
 		
-		favoritosService.addFavorito(idVideojuego, 1, username);
+		favoritosService.addFavorito(idVideojuego, favoritosService.getIdUser(username));
 		
-		return "redirect:/";
+		return "redirect:/juegos";
 	}
 }

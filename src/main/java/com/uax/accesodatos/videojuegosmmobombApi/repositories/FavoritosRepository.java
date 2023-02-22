@@ -16,7 +16,7 @@ import com.uax.accesodatos.videojuegosmmobombApi.mapper.IdRowMapper;
 public class FavoritosRepository {
 
 	@Autowired
-	private JdbcTemplate jdbctemplate;
+	private JdbcTemplate jdbctemplate = new JdbcTemplate();
 	
 	public List<VideojuegosDTO> getAllFavoritos(int user) {
 		List<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
@@ -35,7 +35,9 @@ public class FavoritosRepository {
 	}
 	
 	public UserDTO getIdUser(String nombre) {
-		return jdbctemplate.queryForObject("SELECT id_user FROM users WHERE username= '"+nombre+"'", new IdRowMapper());
+		UserDTO user = new UserDTO();
+		user = jdbctemplate.queryForObject("SELECT id_user FROM users WHERE username= '"+nombre+"'", new IdRowMapper());
+		return user;
 		
 	}
 	
