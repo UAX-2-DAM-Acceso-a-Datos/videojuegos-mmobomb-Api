@@ -38,3 +38,8 @@ INSERT INTO categorias VALUES
 (37, 'SIDE SCROLLER'),
 (38, 'SUPERHERO'),
 (39, 'PERMADEATH');
+
+INSERT INTO plataformas VALUES
+(1, 'PC (Windows)'),
+(2, 'Web Browser'),
+(3, 'PC (Windows), Web Browser');

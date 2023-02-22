@@ -2,6 +2,7 @@ package com.uax.accesodatos.videojuegosmmobombApi.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +18,17 @@ import com.uax.accesodatos.videojuegosmmobombApi.services.VideojuegosService;
 
 @Controller
 public class BusquedaController {
-	@GetMapping("/init-filter")
+	@Autowired
+	CategoriaRepository categRepo;
+	@Autowired
+	PlataformaRepository platformRepo;
+	
+	@GetMapping("/filter")
 	public String init(Model model) {
 		BusquedaParamsDTO searchArgs = new BusquedaParamsDTO();
 		model.addAttribute("searchArgs", searchArgs);
-		model.addAttribute("categorias", new CategoriaRepository().getAllCategorias());
-		model.addAttribute("plataformas", new PlataformaRepository().getAllPlataformas());
+		model.addAttribute("categories", categRepo.getAllCategorias());
+		model.addAttribute("platforms", platformRepo.getAllPlataformas());
 		return "busquedaForm";
 	}
 
