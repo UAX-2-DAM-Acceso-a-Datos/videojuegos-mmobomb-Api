@@ -35,6 +35,11 @@ public class VideojuegosController {
 		
 		return "redirect:/login";
 	}
+	/**
+	 * @author Gonxos       
+	 * @param model
+	 * @return vista a la pantalla principal de todos los juegos
+	 */
 	
 	@GetMapping("/juegos")
 	public String goToAllJuegos(Model modelo) {
