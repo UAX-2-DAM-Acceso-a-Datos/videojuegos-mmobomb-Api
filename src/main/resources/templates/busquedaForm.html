@@ -46,14 +46,15 @@
 			th:action="@{/go-filtered-list}" th:object="${searchArgs}">
 			<div class="col-auto">
 				<select th:field="*{category}" class="form-control" id="dropDownList">
+					<option th:value="null" selected></option>
 					<option th:each="c : ${categories}" th:value="${c.categoria}" th:text="${c.categoria}">
 					</option>
 				</select>
 			</div>
 			<div class="col-auto">
 				<select th:field="*{platform}" class="form-control" id="dropDownList">
-					<option th:each="p : ${platforms}" th:value="${p.plataforma}" th:text="${p.plataforma}">
-					</option>
+					<option th:value="null" selected></option>
+					<option th:each="p : ${platforms}" th:value="${p.plataforma}" th:text="${p.plataforma}"></option>
 				</select>
 			</div>
 			<div class="col-3 col-sm-2">
