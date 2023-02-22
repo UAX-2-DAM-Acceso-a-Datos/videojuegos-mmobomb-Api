@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.uax.accesodatos.videojuegosmmobombApi.dto.UserDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.mapper.FavoritosRowMapper;
+import com.uax.accesodatos.videojuegosmmobombApi.mapper.IdRowMapper;
 
 @Repository
 public class FavoritosRepository {
@@ -29,8 +31,11 @@ public class FavoritosRepository {
 		}catch (Exception e) {
 			return false;
 		}
-		return true;
-		
+		return true;	
+	}
+	
+	public UserDTO getIdUser(String nombre) {
+		return jdbctemplate.queryForObject("SELECT id_user FROM users WHERE username= '"+nombre+"'", new IdRowMapper());
 		
 	}
 	
