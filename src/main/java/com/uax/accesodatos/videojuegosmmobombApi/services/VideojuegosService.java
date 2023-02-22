@@ -7,9 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.uax.accesodatos.videojuegosmmobombApi.dto.CategoriaDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
-import com.uax.accesodatos.videojuegosmmobombApi.dto.PlataformaDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 
 /**
@@ -54,7 +52,8 @@ public class VideojuegosService {
 	/**
 	 * @author AlvaroLozoya
 	 * 
-	 *         Método para obtener de la api toda la info de un videojuego
+	 *         Método para obtener de la api toda la info de un videojuego, también implementa
+	 *         la funcionalidad para quitar las etiquetas html que devuelve la api en la descripción
 	 * 
 	 * @param id
 	 * @return InfoVideojuegoDTO
@@ -90,16 +89,17 @@ public class VideojuegosService {
 		}else if (platform.equals("Web Browser")) {
 			platform = "browser";
 		}
+
 		
-		String url = URLJUEGOSRANDOM + "?";
-		if (categoria != null && platform != null) {
-			url += "category=" + categoria + "&platform=" + platform;
-		} else if (categoria != null) {
-			url += "category=" + categoria;
-		} else if (platform != null) {
-			url += "platform=" + platform;
+		String url = URLJUEGOSRANDOM;
+		if (!categoria.equals("") && !platform.equals("")) {
+			url += "?category=" + categoria + "&platform=" + platform;
+		} else if (!categoria.equals("")) {
+			url += "?category=" + categoria;
+		} else if (!platform.equals("")) {
+			url += "?platform=" + platform;
 		} else {
-			url = URLJUEGOSRANDOM;
+			url = "https://www.mmobomb.com/api1/games";
 		}
 		
 		String resp = restT.getForObject(url, String.class);

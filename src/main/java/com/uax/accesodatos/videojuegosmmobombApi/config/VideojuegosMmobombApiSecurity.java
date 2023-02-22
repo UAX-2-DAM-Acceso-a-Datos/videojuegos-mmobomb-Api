@@ -18,7 +18,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.uax.accesodatos.videojuegosmmobombApi.services.UserService;
 
-
 @EnableWebSecurity
 @Configuration
 public class VideojuegosMmobombApiSecurity {
@@ -33,54 +32,43 @@ public class VideojuegosMmobombApiSecurity {
 	public UserDetailsService userDetailsService() {
 		return new UserService();
 	}
-	
+
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
-	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-	     
-	    authProvider.setUserDetailsService(userDetailsService());
-	    authProvider.setPasswordEncoder(passwordEncoder());
-	 
-	    return authProvider;
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+		authProvider.setUserDetailsService(userDetailsService());
+		authProvider.setPasswordEncoder(passwordEncoder());
+
+		return authProvider;
 	}
 
-	 @Bean
-	    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-	        AuthenticationManagerBuilder authenticationManagerBuilder = 
-	            http.getSharedObject(AuthenticationManagerBuilder.class);
-	        authenticationManagerBuilder.authenticationProvider(authProvider);
-	        return authenticationManagerBuilder.build();
-	    }
+	@Bean
+	public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+		AuthenticationManagerBuilder authenticationManagerBuilder = http
+				.getSharedObject(AuthenticationManagerBuilder.class);
+		authenticationManagerBuilder.authenticationProvider(authProvider);
+		return authenticationManagerBuilder.build();
+	}
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	         auth
-	         .authenticationProvider(authProvider)
-	         .userDetailsService(userDetailsService())
-	         .passwordEncoder(new BCryptPasswordEncoder());
-	    }
-	
-	
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authProvider).userDetailsService(userDetailsService())
+				.passwordEncoder(new BCryptPasswordEncoder());
+	}
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests()
-		.requestMatchers("/juegos/**").authenticated()
-		.requestMatchers("/index").permitAll()
-		.and().httpBasic()
-		.and().csrf().disable()
-		.formLogin()
-		.loginPage("/login")
-		.loginProcessingUrl("/process-login")
-		.failureForwardUrl("/login_failure_handler")
-		.successForwardUrl("/login_sucess_handler")
-		.defaultSuccessUrl("/juegos")
-        .failureUrl("/login?error");
-		
+		http.authorizeRequests().requestMatchers("/juegos/**").authenticated().requestMatchers("/index").permitAll()
+				.and().httpBasic().and().csrf().disable().formLogin().loginPage("/login")
+				.loginProcessingUrl("/process-login").failureForwardUrl("/login_failure_handler")
+				.successForwardUrl("/login_sucess_handler").defaultSuccessUrl("/juegos").failureUrl("/login?error");
+
 //		http.authorizeRequests()
 //		.requestMatchers("/admin").hasRole(ADMIN)
 //		.requestMatchers("/user").hasAnyRole(ADMIN, USER)
@@ -90,14 +78,16 @@ public class VideojuegosMmobombApiSecurity {
 
 		http.headers().frameOptions().sameOrigin();
 		http.authenticationProvider(authenticationProvider());
-		
-    return http.build();
-    
-	}@Bean 
+
+		return http.build();
+
+	}
+
+	@Bean
 	public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource ds) {
 		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
 		jdbcUserDetailsManager.setDataSource(ds);
 		return jdbcUserDetailsManager;
 	}
-	
+
 }

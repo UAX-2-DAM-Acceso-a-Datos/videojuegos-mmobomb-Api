@@ -17,43 +17,47 @@ public class FavoritosRepository {
 
 	@Autowired
 	private JdbcTemplate jdbctemplate = new JdbcTemplate();
-	
+
 	public List<VideojuegosDTO> getAllFavoritos(int user) {
 		List<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
-		juegos = jdbctemplate.query("SELECT id_videojuego FROM favoritos WHERE id_user= "+user, new FavoritosRowMapper());
+		juegos = jdbctemplate.query("SELECT id_videojuego FROM favoritos WHERE id_user= " + user,
+				new FavoritosRowMapper());
 		return juegos;
 	}
-	
+
 	public boolean addJuego(int juego, int id_user) {
 		try {
 
-			String sql = String.format("INSERT INTO favoritos (id_videojuego,id_user) VALUES('"+juego+"','"+id_user+"')");
+			String sql = String
+					.format("INSERT INTO favoritos (id_videojuego,id_user) VALUES('" + juego + "','" + id_user + "')");
 
 			jdbctemplate.execute(sql);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
-		return true;	
+		return true;
 	}
-	
+
 	public boolean deleteJuego(VideojuegosDTO juego, int id_user) {
-		
+
 		try {
 
-			String sql = String.format("DELETE * FROM favoritos WHERE id_user='%d' AND id_videojuego='%d'", id_user, juego.getId());
+			String sql = String.format("DELETE FROM favoritos WHERE id_user='%d' AND id_videojuego='%d'", id_user,
+					juego.getId());
 
 			jdbctemplate.execute(sql);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
-		return true;	
+		return true;
 	}
-	
+
 	public UserDTO getIdUser(String nombre) {
 		UserDTO user = new UserDTO();
-		user = jdbctemplate.queryForObject("SELECT id_user FROM users WHERE username= '"+nombre+"'", new IdRowMapper());
+		user = jdbctemplate.queryForObject("SELECT id_user FROM users WHERE username= '" + nombre + "'",
+				new IdRowMapper());
 		return user;
-		
+
 	}
-	
+
 }
