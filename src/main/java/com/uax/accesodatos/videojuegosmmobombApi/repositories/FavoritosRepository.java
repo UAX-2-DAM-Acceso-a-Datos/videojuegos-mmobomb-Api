@@ -40,7 +40,7 @@ public class FavoritosRepository {
 		
 		try {
 
-			String sql = String.format("DELETE * FROM favoritos WHERE id_user='%d' AND id_videojuego='%d'", id_user, juego.getId());
+			String sql = String.format("DELETE FROM favoritos WHERE id_user='%d' AND id_videojuego='%d'", id_user, juego.getId());
 
 			jdbctemplate.execute(sql);
 		}catch (Exception e) {
