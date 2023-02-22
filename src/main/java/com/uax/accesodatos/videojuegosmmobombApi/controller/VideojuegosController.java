@@ -67,6 +67,9 @@ public class VideojuegosController {
 			MinSysReqDTO minSysReqdto = new MinSysReqDTO("No Disponible");
 			infoJuego.setMinimum_system_requirements(minSysReqdto);
 		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();
+	    model.addAttribute("username", username);
 		
 		model.addAttribute("images", infoJuego.getScreenshots());
 		model.addAttribute("infojuego", infoJuego);
