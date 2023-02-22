@@ -24,9 +24,9 @@ public class FavoritosRepository {
 		return juegos;
 	}
 	
-	public boolean addJuego(VideojuegosDTO juego, int id_user) {
+	public boolean addJuego(int juego, int id_user) {
 		try {
-			String sql = String.format("INSERT INTO favoritos (id_videojuego,id_user) VALUES('%d','%d')", juego.getId(), id_user);
+			String sql = String.format("INSERT INTO favoritos (id_videojuego,id_user) VALUES('"+juego+"','"+id_user+"')");
 			jdbctemplate.execute(sql);
 		}catch (Exception e) {
 			return false;
