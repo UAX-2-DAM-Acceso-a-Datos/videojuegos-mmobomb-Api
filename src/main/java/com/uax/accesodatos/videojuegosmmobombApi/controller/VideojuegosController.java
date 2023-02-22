@@ -1,7 +1,6 @@
 package com.uax.accesodatos.videojuegosmmobombApi.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
-import com.uax.accesodatos.videojuegosmmobombApi.dto.UserDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.MinSysReqDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.ScreenshotDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.UserDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.services.VideojuegosService;
 
