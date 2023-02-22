@@ -20,3 +20,9 @@ id_categoria INT,
 categoria VARCHAR(50),
 PRIMARY KEY(id_categoria)
 )ENGINE=InnoDB;
+
+CREATE TABLE plataformas(
+id_plataforma INT,
+plataforma VARCHAR(50),
+PRIMARY KEY(id_plataforma)
+)ENGINE=InnoDB;

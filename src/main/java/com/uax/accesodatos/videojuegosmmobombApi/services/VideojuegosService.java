@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
-import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
 import com.google.gson.JsonSyntaxException;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 
 /**
@@ -17,8 +17,8 @@ import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 @Service
 public class VideojuegosService {
 
-	private final static String urlJuegosRandom = "https://www.mmobomb.com/api1/games";
-	private final static String urlJuegoById = "https://www.mmobomb.com/api1/game?id=";
+	private final static String URLJUEGOSRANDOM = "https://www.mmobomb.com/api1/games";
+	private final static String URLJUEGOBYID = "https://www.mmobomb.com/api1/game?id=";
 
 	/**
 	 * @author Gonzalo
@@ -42,12 +42,11 @@ public class VideojuegosService {
 	public static ArrayList<VideojuegosDTO> getListJuegos() {
 		RestTemplate restT = new RestTemplate();
 		ArrayList<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
-		String result = restT.getForObject(urlJuegosRandom, String.class);
+		String result = restT.getForObject(URLJUEGOSRANDOM, String.class);
 
 		juegos = getResponseByString(result);
 
 		return juegos;
-
 	}
 
 	/**
@@ -61,11 +60,44 @@ public class VideojuegosService {
 	public InfoVideojuegoDTO getInfoVideojuegoById(int id) {
 		Gson gson = new Gson();
 		RestTemplate restT = new RestTemplate();
-		String result = restT.getForObject(urlJuegoById + id, String.class);
+		String result = restT.getForObject(URLJUEGOBYID + id, String.class);
 
 		InfoVideojuegoDTO videojuego = gson.fromJson(result, InfoVideojuegoDTO.class);
-
+		
+		String html = videojuego.getDescription();
+		videojuego.setDescription(html.replaceAll("<[^>]*>", ""));
+		
 		return videojuego;
 	}
 
+	/**
+	 * @author Edu
+	 * 
+	 *         coger de la api la lista filtrada por categoria o plataforma
+	 * 
+	 * @param categoria
+	 * @param platform
+	 * @return
+	 */
+	public static ArrayList<VideojuegosDTO> getListJuegosFiltered(String categoria, String platform) {
+		RestTemplate restT = new RestTemplate();
+		ArrayList<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
+
+		String url = URLJUEGOSRANDOM + "?";
+		if (categoria != null && platform != null) {
+			url += "category=" + categoria + "&platform=" + platform;
+		} else if (categoria != null) {
+			url += "category=" + categoria;
+		} else if (platform != null) {
+			url += "platform=" + platform;
+		} else {
+			url = URLJUEGOSRANDOM;
+		}
+		
+		String result = restT.getForObject(url, String.class);
+
+		juegos = getResponseByString(result);
+
+		return juegos;
+	}
 }
