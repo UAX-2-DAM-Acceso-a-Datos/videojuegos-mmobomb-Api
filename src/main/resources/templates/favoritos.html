@@ -27,10 +27,10 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="#">Categorias</a></li>
-						<li class="nav-item"><a class="nav-link active" href="#">Plataformas</a>
-						</li>
-						<li class="nav-item"><a class="nav-link active" href="/go-to-favoritos">Favoritos</a>
-						</li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" th:href="@{/filter}"> <i
+								class="bi bi-search"></i>
+						</a></li>
 					</ul>
 					<div class="navbar-text"> 
 						<a th:text="${username}" class="btn btn-danger me-1"></a> 
