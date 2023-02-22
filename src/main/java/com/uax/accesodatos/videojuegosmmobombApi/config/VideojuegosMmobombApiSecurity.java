@@ -69,7 +69,7 @@ public class VideojuegosMmobombApiSecurity {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-		.requestMatchers("/go-to-favoritos/**").authenticated()
+		.requestMatchers("/juegos/**").authenticated()
 		.requestMatchers("/index").permitAll()
 		.and().httpBasic()
 		.and().csrf().disable()
@@ -78,7 +78,7 @@ public class VideojuegosMmobombApiSecurity {
 		.loginProcessingUrl("/process-login")
 		.failureForwardUrl("/login_failure_handler")
 		.successForwardUrl("/login_sucess_handler")
-		.defaultSuccessUrl("/go-to-favoritos")
+		.defaultSuccessUrl("/juegos")
         .failureUrl("/login?error");
 		
 //		http.authorizeRequests()
