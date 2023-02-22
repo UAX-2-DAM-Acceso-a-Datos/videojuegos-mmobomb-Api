@@ -1,6 +1,7 @@
 package com.uax.accesodatos.videojuegosmmobombApi.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.UserDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.MinSysReqDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.ScreenshotDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.services.VideojuegosService;
 
@@ -52,7 +54,7 @@ public class VideojuegosController {
 	 * @author AlvaroLozoya 
 	 * Metodo GET para hacer una llamada a la api con un id de un juego específico
 	 * Realiza una comparación para ver si contiene requisitos minimos, en caso de que no muestra no 
-	 * disponible
+	 * disponible y en caso de que devuelva la imagen erronea de League of Legends lo soluciona
 	 *         
 	 * @param model
 	 * @return vista a la pantalla de juego
@@ -60,12 +62,25 @@ public class VideojuegosController {
 	@GetMapping("/go-to-id-juego")
 	public String goToIdJuego(@RequestParam int id, Model model) {
 		InfoVideojuegoDTO infoJuego = new InfoVideojuegoDTO();
+		ArrayList<ScreenshotDTO> screenshot = new ArrayList<ScreenshotDTO>();
 		
 		infoJuego = videojuegosService.getInfoVideojuegoById(id);
+		screenshot=infoJuego.getScreenshots();
 		
 		if (infoJuego.getMinimum_system_requirements() == null) {
 			MinSysReqDTO minSysReqdto = new MinSysReqDTO("No Disponible");
 			infoJuego.setMinimum_system_requirements(minSysReqdto);
+		}
+		
+		for (int i = 0; i < infoJuego.getScreenshots().size(); i++) {
+			ScreenshotDTO screen = new ScreenshotDTO(3, "");
+			screen = screenshot.get(i);
+			if (screen.getImage().equals("https://www.mmobomb.com/g/286/League-of-Legends-4.jpg")) {
+				ScreenshotDTO image= new ScreenshotDTO(i, "https://www.mmobomb.com/g/286/League-of-Legends-3.jpg");
+				
+				screenshot.set(i, image);
+				infoJuego.setScreenshots(screenshot);
+			}
 		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();
