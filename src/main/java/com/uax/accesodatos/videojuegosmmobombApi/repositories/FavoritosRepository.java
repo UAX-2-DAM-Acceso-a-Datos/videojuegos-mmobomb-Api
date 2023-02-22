@@ -34,6 +34,17 @@ public class FavoritosRepository {
 		return true;	
 	}
 	
+	public boolean deleteJuego(VideojuegosDTO juego, int id_user) {
+		
+		try {
+			String sql = String.format("DELETE FROM favoritos WHERE id_user='%d'", id_user);
+			jdbctemplate.execute(sql);
+		}catch (Exception e) {
+			return false;
+		}
+		return true;	
+	}
+	
 	public UserDTO getIdUser(String nombre) {
 		UserDTO user = new UserDTO();
 		user = jdbctemplate.queryForObject("SELECT id_user FROM users WHERE username= '"+nombre+"'", new IdRowMapper());

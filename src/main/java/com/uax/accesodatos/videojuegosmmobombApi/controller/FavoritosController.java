@@ -48,4 +48,14 @@ public class FavoritosController {
 		
 		return "redirect:/juegos";
 	}
+	
+	@GetMapping("/deleteFavorito")
+	public String deleteVideojuegoById(@RequestParam("id") int idVideojuego) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();
+	    
+		favoritosService.deleteFavorito(idVideojuego, favoritosService.getIdUser(username));
+		
+		return "redirect:/juegos";
+	}
 }

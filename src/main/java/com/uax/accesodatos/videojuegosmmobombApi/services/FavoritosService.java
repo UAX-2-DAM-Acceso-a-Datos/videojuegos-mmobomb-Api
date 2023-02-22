@@ -58,6 +58,17 @@ public class FavoritosService {
 		return true;		
 	}
 	
+	public boolean deleteFavorito(int idJuego, int idUser) {
+		VideojuegosDTO juego = new VideojuegosDTO(idJuego);
+		
+		for (VideojuegosDTO aniadido : fr.getAllFavoritos(idUser)) {
+			if (juego.getId() == aniadido.getId()) {
+				fr.deleteJuego(juego, idUser);
+			}
+		}
+		return false;
+	}
+	
 	public int getIdUser(String nombre) {
 		UserDTO user = new UserDTO();
 		

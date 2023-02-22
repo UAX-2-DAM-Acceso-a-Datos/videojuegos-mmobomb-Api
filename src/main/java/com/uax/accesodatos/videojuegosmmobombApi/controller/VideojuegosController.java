@@ -77,6 +77,26 @@ public class VideojuegosController {
 		return "InfoJuego";
 	}
 	
+	@GetMapping("/go-to-delete-juego")
+	public String goToIdDJuego(@RequestParam int id, Model model) {
+		InfoVideojuegoDTO infoJuego = new InfoVideojuegoDTO();
+		
+		infoJuego = videojuegosService.getInfoVideojuegoById(id);
+		
+		if (infoJuego.getMinimum_system_requirements() == null) {
+			MinSysReqDTO minSysReqdto = new MinSysReqDTO("No Disponible");
+			infoJuego.setMinimum_system_requirements(minSysReqdto);
+		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();
+	    model.addAttribute("username", username);
+		
+		model.addAttribute("images", infoJuego.getScreenshots());
+		model.addAttribute("infojuego", infoJuego);
+
+		return "InfoJuegoAniadido";
+	}
+	
 	@RequestMapping(value = "/registrar")
 	public String goToRegistrar(Model model) {
 		UserDTO user = new UserDTO();
