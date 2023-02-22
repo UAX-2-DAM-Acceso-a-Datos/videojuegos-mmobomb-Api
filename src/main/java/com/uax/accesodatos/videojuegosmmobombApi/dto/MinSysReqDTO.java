@@ -14,7 +14,13 @@ public class MinSysReqDTO {
 	public String graphics;
 	public String storage;
 	
-	
+	public MinSysReqDTO(String os) {
+		this.os=os;
+		this.processor="";
+		this.memory="";
+		this.graphics="";
+		this.storage="";
+	}
 	public String getOs() {
 		return os;
 	}

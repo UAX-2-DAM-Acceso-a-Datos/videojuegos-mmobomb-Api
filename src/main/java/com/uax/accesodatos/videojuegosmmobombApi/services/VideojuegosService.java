@@ -63,7 +63,10 @@ public class VideojuegosService {
 		String result = restT.getForObject(URLJUEGOBYID + id, String.class);
 
 		InfoVideojuegoDTO videojuego = gson.fromJson(result, InfoVideojuegoDTO.class);
-
+		
+		String html = videojuego.getDescription();
+		videojuego.setDescription(html.replaceAll("<[^>]*>", ""));
+		
 		return videojuego;
 	}
 
