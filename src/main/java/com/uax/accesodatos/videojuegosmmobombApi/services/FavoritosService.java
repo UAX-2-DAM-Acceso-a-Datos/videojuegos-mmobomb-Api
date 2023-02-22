@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.UserDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.repositories.FavoritosRepository;
 
@@ -28,9 +29,11 @@ public class FavoritosService {
 		return videojuego;
 	}
 	
-	public List<VideojuegosDTO> getFavoritos(int user){
+	public List<VideojuegosDTO> getFavoritos(String user){
 		List<VideojuegosDTO> juegos;
-		juegos = fr.getAllFavoritos(user);
+		UserDTO usuario = fr.getIdUser(user);
+		
+		juegos = fr.getAllFavoritos(usuario.getId_user());
 		List<VideojuegosDTO> juegosFavoritos = new ArrayList<VideojuegosDTO>();
 		
 		for(VideojuegosDTO total: juegos){
@@ -44,7 +47,7 @@ public class FavoritosService {
 	}
 
 	
-	public boolean addFavorito(int idJuego, int idUser) {
+	public boolean addFavorito(int idJuego, int idUser, String username) {
 		VideojuegosDTO juego = new VideojuegosDTO(idJuego);
 		
 		for(VideojuegosDTO existe: fr.getAllFavoritos(idUser)) {

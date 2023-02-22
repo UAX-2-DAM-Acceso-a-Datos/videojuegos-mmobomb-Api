@@ -4,8 +4,15 @@ public class UserDTO {
 	public int id_user;
 	public String username;
 	public String password;
+	private String roles;
 	
 	
+	public String getRoles() {
+		return roles;
+	}
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
 	public int getId_user() {
 		return id_user;
 	}
