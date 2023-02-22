@@ -54,7 +54,8 @@ public class VideojuegosService {
 	/**
 	 * @author AlvaroLozoya
 	 * 
-	 *         Método para obtener de la api toda la info de un videojuego
+	 *         Método para obtener de la api toda la info de un videojuego, también implementa
+	 *         la funcionalidad para quitar las etiquetas html que devuelve la api en la descripción
 	 * 
 	 * @param id
 	 * @return InfoVideojuegoDTO

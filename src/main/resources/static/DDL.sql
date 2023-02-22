@@ -7,6 +7,12 @@ password VARCHAR(250) NOT NULL,
 PRIMARY KEY(id_user)
 )ENGINE=InnoDB;
 
+create table authorities (
+username varchar(50) not null,
+authority varchar(50) not null,
+constraint fk_authorities_users foreign key(username) references users(username)
+);
+
 CREATE TABLE favoritos(
 id_videojuego INT UNSIGNED,
 id_user INT UNSIGNED,

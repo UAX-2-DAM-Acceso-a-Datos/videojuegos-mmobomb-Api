@@ -9,6 +9,11 @@ public class ScreenshotDTO {
 	public int id;
     public String image;
     
+    public ScreenshotDTO(int id, String image) {
+    	this.id=id;
+    	this.image=image;
+    }
+    
 	public int getId() {
 		return id;
 	}
