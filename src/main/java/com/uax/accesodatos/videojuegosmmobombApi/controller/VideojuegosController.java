@@ -34,7 +34,6 @@ public class VideojuegosController {
 	
 	@GetMapping("/")
 	public String home(Model modelo) {
-		
 		return "redirect:/login";
 	}
 	/**
