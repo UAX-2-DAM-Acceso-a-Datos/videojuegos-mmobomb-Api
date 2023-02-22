@@ -47,7 +47,7 @@ public class FavoritosService {
 	}
 
 	
-	public boolean addFavorito(int idJuego, int idUser, String username) {
+	public boolean addFavorito(int idJuego, int idUser) {
 		VideojuegosDTO juego = new VideojuegosDTO(idJuego);
 		
 		for(VideojuegosDTO existe: fr.getAllFavoritos(idUser)) {
@@ -55,8 +55,16 @@ public class FavoritosService {
 				fr.addJuego(juego, idUser);
 			}
 		}
-		
 		return true;		
+	}
+	
+	public int getIdUser(String nombre) {
+		UserDTO user = new UserDTO();
+		
+		user = fr.getIdUser(nombre);
+		
+		return user.getId_user();
+		
 	}
 	
 	
