@@ -26,7 +26,9 @@ public class FavoritosRepository {
 	
 	public boolean addJuego(int juego, int id_user) {
 		try {
+
 			String sql = String.format("INSERT INTO favoritos (id_videojuego,id_user) VALUES('"+juego+"','"+id_user+"')");
+
 			jdbctemplate.execute(sql);
 		}catch (Exception e) {
 			return false;
@@ -37,7 +39,9 @@ public class FavoritosRepository {
 	public boolean deleteJuego(VideojuegosDTO juego, int id_user) {
 		
 		try {
+
 			String sql = String.format("DELETE * FROM favoritos WHERE id_user='%d' AND id_videojuego='%d'", id_user, juego.getId());
+
 			jdbctemplate.execute(sql);
 		}catch (Exception e) {
 			return false;
