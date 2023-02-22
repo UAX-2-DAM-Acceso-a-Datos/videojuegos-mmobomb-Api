@@ -42,19 +42,17 @@
 		</nav>
 		<main class="container container-sm h-75">
 			<form action="post" class="row justify-content-center align-items-center text-white h-100"
-				th:action="@{/filter}" th:object="${searchArgs}">
-				<div class="col-3 col-sm-2 me-3 d-flex">
-					<select th;field="*{category}" th:value="*{category}" class="form-select"
-						aria-label="Default select example">
-						<option th:value="null" selected>--Seleccione una opción--</option>
-						<option th:each="c : ${categories}" th:value="${c.id_categoria}" th:text="${c.categoria}"></option>
+				th:action="@{/filtered}" th:object="${searchArgs}">
+				<div class="col-auto">
+					<select th:field="*{category}" class="form-control" id="dropDownList">
+						<option th:each="c : ${categories}" th:value="${c.categoria}" th:text="${c.categoria}">
+						</option>
 					</select>
 				</div>
-				<div class="col-3 col-sm-2 me-3 d-flex">
-					<select th;field="*{platform}" th:value="*{platform}" class="form-select"
-						aria-label="Default select example">
-						<option th:value="null" selected>--Seleccione una opción--</option>
-						<option th:each="p : ${platforms}" th:value="${p.id_plataforma}" th:text="${p.plataforma}"></option>
+				<div class="col-auto">
+					<select th:field="*{platform}" class="form-control" id="dropDownList">
+						<option th:each="p : ${platforms}" th:value="${p.plataforma}" th:text="${p.plataforma}">
+						</option>
 					</select>
 				</div>
 				<div class="col-3 col-sm-2">

@@ -7,7 +7,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.CategoriaDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.PlataformaDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
 
 /**
@@ -26,7 +28,7 @@ public class VideojuegosService {
 	 * @return
 	 * @throws JsonSyntaxException
 	 */
-	public static ArrayList<VideojuegosDTO> getResponseByString(String result) throws JsonSyntaxException {
+	public ArrayList<VideojuegosDTO> getResponseByString(String result) throws JsonSyntaxException {
 		ArrayList<VideojuegosDTO> juegos;
 		Gson gson = new Gson();
 		juegos = gson.fromJson(result, ArrayList.class);
@@ -39,7 +41,7 @@ public class VideojuegosService {
 	 * @author Gonzalo
 	 * @return
 	 */
-	public static ArrayList<VideojuegosDTO> getListJuegos() {
+	public ArrayList<VideojuegosDTO> getListJuegos() {
 		RestTemplate restT = new RestTemplate();
 		ArrayList<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
 		String result = restT.getForObject(URLJUEGOSRANDOM, String.class);
@@ -79,10 +81,16 @@ public class VideojuegosService {
 	 * @param platform
 	 * @return
 	 */
-	public static ArrayList<VideojuegosDTO> getListJuegosFiltered(String categoria, String platform) {
+	public ArrayList<VideojuegosDTO> getListJuegosFiltered(String categoria, String platform) {
 		RestTemplate restT = new RestTemplate();
 		ArrayList<VideojuegosDTO> juegos = new ArrayList<VideojuegosDTO>();
 
+		if (platform.equals("PC (Windows)")) {
+			platform = "pc";
+		}else if (platform.equals("Web Browser")) {
+			platform = "browser";
+		}
+		
 		String url = URLJUEGOSRANDOM + "?";
 		if (categoria != null && platform != null) {
 			url += "category=" + categoria + "&platform=" + platform;
@@ -94,9 +102,9 @@ public class VideojuegosService {
 			url = URLJUEGOSRANDOM;
 		}
 		
-		String result = restT.getForObject(url, String.class);
-
-		juegos = getResponseByString(result);
+		String resp = restT.getForObject(url, String.class);
+		
+		juegos = getResponseByString(resp);
 
 		return juegos;
 	}

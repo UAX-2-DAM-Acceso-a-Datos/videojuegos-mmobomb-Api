@@ -40,6 +40,5 @@ INSERT INTO categorias VALUES
 (39, 'PERMADEATH');
 
 INSERT INTO plataformas VALUES
-(1, 'PC (Windows)'),
-(2, 'Web Browser'),
-(3, 'PC (Windows), Web Browser');
+(1, 'pc'),
+(2, 'browser');

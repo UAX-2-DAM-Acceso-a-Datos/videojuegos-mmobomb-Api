@@ -20,7 +20,7 @@ import com.uax.accesodatos.videojuegosmmobombApi.services.VideojuegosService;
 @Controller
 public class VideojuegosController {
 	@Autowired
-	VideojuegosService videojuegosservice;
+	VideojuegosService videojuegosService;
 	
 	@RequestMapping(value="/login")
 	public String goLogin(Model model) {
@@ -39,7 +39,7 @@ public class VideojuegosController {
 	@GetMapping("/juegos")
 	public String goToAllJuegos(Model modelo) {
 		
-		ArrayList <VideojuegosDTO> juegos = VideojuegosService.getListJuegos();
+		ArrayList <VideojuegosDTO> juegos = videojuegosService.getListJuegos();
 		modelo.addAttribute("juegos", juegos);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();
@@ -61,7 +61,7 @@ public class VideojuegosController {
 	public String goToIdJuego(@RequestParam int id, Model model) {
 		InfoVideojuegoDTO infoJuego = new InfoVideojuegoDTO();
 		
-		infoJuego = videojuegosservice.getInfoVideojuegoById(id);
+		infoJuego = videojuegosService.getInfoVideojuegoById(id);
 		
 		if (infoJuego.getMinimum_system_requirements() == null) {
 			MinSysReqDTO minSysReqdto = new MinSysReqDTO("No Disponible");
