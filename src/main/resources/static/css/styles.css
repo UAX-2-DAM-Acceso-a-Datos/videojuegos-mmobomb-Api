@@ -1,3 +1,14 @@
+
+@font-face {
+font-family: font-title;
+src: url("../fonts/LEMONMILK-Medium.otf");
+
+}
+
+.font-title{
+	font-family: font-title;
+}
+
 .cards {
 	width: 365px;
 	height: 200px;
