@@ -1,0 +1,13 @@
+.gradient-custom {
+background-image: url("../images/wallpaper.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+.bg-my-custom{
+	background: rgba(48, 47, 47, .97);
+}
+
+.error{
+	background: #380202;
+}
