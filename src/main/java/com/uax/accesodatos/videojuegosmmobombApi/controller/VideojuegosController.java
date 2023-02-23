@@ -98,12 +98,25 @@ public class VideojuegosController {
 	@GetMapping("/go-to-delete-juego")
 	public String goToIdDJuego(@RequestParam int id, Model model) {
 		InfoVideojuegoDTO infoJuego = new InfoVideojuegoDTO();
+		ArrayList<ScreenshotDTO> screenshot = new ArrayList<ScreenshotDTO>();
 		
 		infoJuego = videojuegosService.getInfoVideojuegoById(id);
+		screenshot=infoJuego.getScreenshots();
 		
 		if (infoJuego.getMinimum_system_requirements() == null) {
 			MinSysReqDTO minSysReqdto = new MinSysReqDTO("No Disponible");
 			infoJuego.setMinimum_system_requirements(minSysReqdto);
+		}
+		
+		for (int i = 0; i < infoJuego.getScreenshots().size(); i++) {
+			ScreenshotDTO screen = new ScreenshotDTO(3, "");
+			screen = screenshot.get(i);
+			if (screen.getImage().equals("https://www.mmobomb.com/g/286/League-of-Legends-4.jpg")) {
+				ScreenshotDTO image= new ScreenshotDTO(i, "https://www.mmobomb.com/g/286/League-of-Legends-3.jpg");
+				
+				screenshot.set(i, image);
+				infoJuego.setScreenshots(screenshot);
+			}
 		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();
