@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title th:remove="all">Plantilla</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<p>
+		Hola, <span th:text="${name}">Peter Static</span>!
+	</p>
+	<p>
+		Desde <b>InfoGames</b> te informamos que tu cuenta ha sido creada!
+		<span th:text="${subscriptionDate}">28-12-2012</span>
+	</p>
+
+	<p>
+		Saludos, <br />
+		<em>InfoGames</em>
+	</p>
+</body>
+
+</html>
