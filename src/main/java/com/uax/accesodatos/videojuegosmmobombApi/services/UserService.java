@@ -1,7 +1,10 @@
 package com.uax.accesodatos.videojuegosmmobombApi.services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,8 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import com.uax.accesodatos.videojuegosmmobombApi.dto.MailDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.UserDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.repositories.UserRepository;
+import com.uax.accesodatos.videojuegosmmobombApi.utils.VideojuegosUtils;
+
+import jakarta.mail.MessagingException;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -31,6 +38,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired    
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private VideojuegosUtils utils;
 	
 	
     @Override
@@ -59,7 +69,7 @@ public class UserService implements UserDetailsService {
        
     }
 
-    public boolean registerUserDB(UserDTO myUser) {
+    public boolean registerUserDB(UserDTO myUser) throws MessagingException {
     	
     	List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority(myUser.getRoles()));
@@ -70,9 +80,25 @@ public class UserService implements UserDetailsService {
 		User user = new User(myUser.getUsername(), encodededPassword, authorities);
 		
 		jdbcUserDetailsManager.createUser(user);
-    	
+		
+		sendVerifyEmail(myUser);
 		return true;
     	
     }
 
+    public void sendVerifyEmail(UserDTO myUser) throws MessagingException {
+    	MailDTO mail = new MailDTO();
+		//Se debe modificar los campos para que funcione
+		mail.setTo("gerfernama@gmail.com");
+		mail.setFrom("alozollo@myuax.com");
+		mail.setAsunto("Account Created");
+		
+		Map<String, Object> propiedades = new HashMap<String, Object>();
+		propiedades.put("name", myUser.getUsername());
+		propiedades.put("subscriptionDate", LocalDate.now());
+		
+		mail.setProps(propiedades);
+		
+		utils.formarEmail(mail);
+    }
 }

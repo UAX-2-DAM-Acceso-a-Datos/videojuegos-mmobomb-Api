@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.UserDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.services.UserService;
 
+import jakarta.mail.MessagingException;
+
 
 @Controller
 public class UserWebController {
@@ -24,7 +26,7 @@ public class UserWebController {
 	}
 	
 	@PostMapping("/pantallaRegistro")
-	public String registrarUsuarioWeb(@ModelAttribute("usuario") UserDTO usuario) {
+	public String registrarUsuarioWeb(@ModelAttribute("usuario") UserDTO usuario) throws MessagingException {
 		
 		usuario.setRoles("USER");
 		userService.registerUserDB(usuario);

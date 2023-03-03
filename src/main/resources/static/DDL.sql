@@ -32,3 +32,11 @@ id_plataforma INT,
 plataforma VARCHAR(50),
 PRIMARY KEY(id_plataforma)
 )ENGINE=InnoDB;
+
+CREATE TABLE Verificacion_Usuarios (
+token VARCHAR(300) NOT NULL,
+username VARCHAR(50) NOT NULL,
+fecha_solicitud DATE NOT NULL,
+fecha_verificada DATE NOT NULL,
+PRIMARY KEY (token)
+)ENGINE = InnoDB;

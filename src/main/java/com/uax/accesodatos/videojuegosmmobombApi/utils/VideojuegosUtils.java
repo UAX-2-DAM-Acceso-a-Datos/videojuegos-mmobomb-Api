@@ -23,7 +23,7 @@ public class VideojuegosUtils {
 	@Autowired
 	private JavaMailSender emailSender;
 	
-	public void formarEmail(MailDTO mail, String mailtemplate) throws MessagingException {
+	public void formarEmail(MailDTO mail) throws MessagingException {
 		MimeMessage mimeM =  emailSender.createMimeMessage();
 		MimeMessageHelper mimeHelper = new MimeMessageHelper(mimeM, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
 		
@@ -34,7 +34,7 @@ public class VideojuegosUtils {
 		mimeHelper.setTo(mail.getTo());
 		mimeHelper.setFrom(mail.getFrom());
         
-        String htmlMapeado = springtemplateengine.process(mailtemplate, context);
+        String htmlMapeado = springtemplateengine.process("/emails/MailTemplate.html", context);
         mimeHelper.setText(htmlMapeado, true);
         
 		emailSender.send(mimeM);
