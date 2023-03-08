@@ -1,14 +1,19 @@
 package com.uax.accesodatos.videojuegosmmobombApi.services;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.uax.accesodatos.videojuegosmmobombApi.controller.FavoritosController;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.NewsDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.repositories.FavoritoMongoDBRepository;
 
 /**
  * @author Gonzalo
@@ -16,9 +21,13 @@ import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
  */
 @Service
 public class VideojuegosService {
+	
+	@Autowired
+	FavoritoMongoDBRepository fmdb;
 
 	private final static String URLJUEGOSRANDOM = "https://www.mmobomb.com/api1/games";
 	private final static String URLJUEGOBYID = "https://www.mmobomb.com/api1/game?id=";
+	private final static String URLNEWS = "https://www.mmobomb.com/api1/latestnews";
 
 	/**
 	 * @author Gonzalo
@@ -32,6 +41,15 @@ public class VideojuegosService {
 		juegos = gson.fromJson(result, ArrayList.class);
 
 		return juegos;
+
+	}
+	
+	public ArrayList<NewsDTO> getResponseByStringN(String result) throws JsonSyntaxException {
+		ArrayList<NewsDTO> news;
+		Gson gson = new Gson();
+		news = gson.fromJson(result, ArrayList.class);
+
+		return news;
 
 	}
 
@@ -48,6 +66,32 @@ public class VideojuegosService {
 
 		return juegos;
 	}
+	
+	public ArrayList<NewsDTO> getListNews() {
+		RestTemplate restT = new RestTemplate();
+		ArrayList<NewsDTO> news = new ArrayList<NewsDTO>();
+		String result = restT.getForObject(URLNEWS, String.class);
+
+		news = getResponseByStringN(result);
+
+		return news;
+	}
+	
+	public void insertAllNews() {
+		ArrayList<NewsDTO> news = getListNews();
+		fmdb.deleteAll();
+		
+		for (int i = 0; i < news.size(); i++) {
+			NewsDTO noticia = news.get(i);
+			fmdb.save(noticia);
+		}
+	}
+	
+//	public NewsDTO randomNews() {
+//		ArrayList<NewsDTO> news = getListNews();
+//		
+//		
+//	}
 	
 	/**
 	 * @author AlvaroLozoya

@@ -13,26 +13,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.MinSysReqDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.dto.NewsDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.ScreenshotDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.UserDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
+import com.uax.accesodatos.videojuegosmmobombApi.repositories.FavoritoMongoDBRepository;
 import com.uax.accesodatos.videojuegosmmobombApi.services.VideojuegosService;
 
 @Controller
 public class VideojuegosController {
+	
+	@Autowired 
+	FavoritoMongoDBRepository mdbRepository;
+	
 	@Autowired
 	VideojuegosService videojuegosService;
 	
 	@RequestMapping(value="/login")
 	public String goLogin(Model model) {
 		
-		UserDTO user = new UserDTO();
-		model.addAttribute("user", user);
+		
 		return "login";
 	}
 	
 	@GetMapping("/")
 	public String home(Model modelo) {
+		
 		return "redirect:/login";
 	}
 	/**
@@ -51,6 +57,15 @@ public class VideojuegosController {
 	    modelo.addAttribute("username", username);
 		
 		return "index";
+	}
+	
+	@GetMapping("/news")
+	public String goToNews(Model modelo) {
+		ArrayList<NewsDTO> news = videojuegosService.getListNews();
+		videojuegosService.insertAllNews();
+		
+		return null;
+		
 	}
 	
 	/**
