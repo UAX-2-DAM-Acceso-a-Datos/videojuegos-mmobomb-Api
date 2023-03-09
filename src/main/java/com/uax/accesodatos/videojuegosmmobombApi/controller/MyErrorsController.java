@@ -19,11 +19,11 @@ public class MyErrorsController implements ErrorController {
 		switch(req.getStatus()) {
 		
 		case HttpServletResponse.SC_NOT_FOUND: {
-			vista = "404error";
+			vista = "/errors/404error";
 			break;
 		}
 		case HttpServletResponse.SC_INTERNAL_SERVER_ERROR: {
-			vista = "505error";
+			vista = "/errors/505error";
 			break;
 		}
 		
