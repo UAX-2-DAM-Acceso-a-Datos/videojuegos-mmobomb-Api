@@ -1,15 +1,18 @@
 package com.uax.accesodatos.videojuegosmmobombApi.services;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.uax.accesodatos.videojuegosmmobombApi.controller.FavoritosController;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.NewsDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
@@ -44,11 +47,13 @@ public class VideojuegosService {
 
 	}
 	
-	public ArrayList<NewsDTO> getResponseByStringN(String result) throws JsonSyntaxException {
-		ArrayList<NewsDTO> news;
-		Gson gson = new Gson();
-		news = gson.fromJson(result, ArrayList.class);
-
+	public List<NewsDTO> getResponseByStringN(String result) throws JsonSyntaxException, JsonMappingException, JsonProcessingException {
+		List<NewsDTO> news;
+	
+		ObjectMapper objectMapper = new ObjectMapper();
+		NewsDTO[] arrayNews = objectMapper.readValue(result, NewsDTO[].class);
+		news = Arrays.asList(arrayNews);
+		
 		return news;
 
 	}
@@ -67,24 +72,24 @@ public class VideojuegosService {
 		return juegos;
 	}
 	
-	public ArrayList<NewsDTO> getListNews() {
+	public List<NewsDTO> getListNews() throws JsonMappingException, JsonSyntaxException, JsonProcessingException {
+		
 		RestTemplate restT = new RestTemplate();
-		ArrayList<NewsDTO> news = new ArrayList<NewsDTO>();
+		
 		String result = restT.getForObject(URLNEWS, String.class);
 
-		news = getResponseByStringN(result);
-
-		return news;
+		return getResponseByStringN(result);
 	}
 	
-	public void insertAllNews() {
-		ArrayList<NewsDTO> news = getListNews();
+	public void insertAllNews() throws JsonMappingException, JsonSyntaxException, JsonProcessingException {
+		List<NewsDTO> news = getListNews();
 		fmdb.deleteAll();
 		
 		for (int i = 0; i < news.size(); i++) {
 			NewsDTO noticia = news.get(i);
 			fmdb.save(noticia);
 		}
+		
 	}
 	
 //	public NewsDTO randomNews() {

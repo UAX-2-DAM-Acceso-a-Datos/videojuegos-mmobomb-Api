@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.google.gson.JsonSyntaxException;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.InfoVideojuegoDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.MinSysReqDTO;
-import com.uax.accesodatos.videojuegosmmobombApi.dto.NewsDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.ScreenshotDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.UserDTO;
 import com.uax.accesodatos.videojuegosmmobombApi.dto.VideojuegosDTO;
@@ -32,6 +34,7 @@ public class VideojuegosController {
 	@RequestMapping(value="/login")
 	public String goLogin(Model model) {
 		
+	
 		
 		return "login";
 	}
@@ -60,11 +63,11 @@ public class VideojuegosController {
 	}
 	
 	@GetMapping("/news")
-	public String goToNews(Model modelo) {
-		ArrayList<NewsDTO> news = videojuegosService.getListNews();
+	public String goToNews(Model modelo) throws JsonMappingException, JsonSyntaxException, JsonProcessingException {
+		
 		videojuegosService.insertAllNews();
 		
-		return null;
+		return "login";
 		
 	}
 	

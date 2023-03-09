@@ -10,7 +10,7 @@ import com.uax.accesodatos.videojuegosmmobombApi.dto.NewsDTO;
 @Repository
 public interface FavoritoMongoDBRepository extends MongoRepository<NewsDTO, String> {
 	
-	Optional<NewsDTO> findByNombre(String nombre);
+	Optional<NewsDTO> findById(String id);
 
 
 }

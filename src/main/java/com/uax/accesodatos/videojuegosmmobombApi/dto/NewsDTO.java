@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "lista")
 public class NewsDTO{
 	@Id
+	public String idMDB;
+	
 	public int id;
 	public String title;
 	public String short_description;
@@ -16,6 +18,10 @@ public class NewsDTO{
 	
 	
 	
+	public NewsDTO() {
+		super();
+	}
+
 	public NewsDTO(int id, String title, String short_description, String thumbnail, String main_image,
 			String article_content, String article_url) {
 		this.id = id;
@@ -25,6 +31,14 @@ public class NewsDTO{
 		this.main_image = main_image;
 		this.article_content = article_content;
 		this.article_url = article_url;
+	}
+
+	public String getIdMDB() {
+		return idMDB;
+	}
+
+	public void setIdMDB(String idMDB) {
+		this.idMDB = idMDB;
 	}
 
 	public int getId() {
