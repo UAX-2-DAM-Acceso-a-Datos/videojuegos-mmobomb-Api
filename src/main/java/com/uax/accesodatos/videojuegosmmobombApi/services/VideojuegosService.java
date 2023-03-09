@@ -82,13 +82,15 @@ public class VideojuegosService {
 	}
 	
 	public void insertAllNews() throws JsonMappingException, JsonSyntaxException, JsonProcessingException {
+		
+		//Recuperamos el listado de noticias actualizado.
 		List<NewsDTO> news = getListNews();
+		
+		//Se elimina las noticias existentes.
 		fmdb.deleteAll();
 		
-		for (int i = 0; i < news.size(); i++) {
-			NewsDTO noticia = news.get(i);
-			fmdb.save(noticia);
-		}
+		//Guardamos en la base de datos las noticias nuevas.
+		fmdb.saveAll(news);
 		
 	}
 	
